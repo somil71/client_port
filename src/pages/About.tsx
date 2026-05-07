@@ -55,6 +55,7 @@ export default function About() {
       <PageMeta
         title="Somil Portfolio | About Me"
         description="CV-style about page with personal details, education, skills, experience, and achievements."
+        url="https://client-port.example.com/about"
       />
 
       <div className="max-w-6xl mx-auto relative z-10">

@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    /*
+      Rule logic:
+      - Allow public create access only for the `contact_messages` collection.
+      - Validate that incoming documents include the required string fields and a timestamp field.
+      - Deny all reads from `contact_messages` so frontend visitors cannot view submissions.
+      - Deny all updates, deletes, and all access to every other collection by default.
+    */
+    match /contact_messages/{documentId} {
+      allow create: if
+        request.resource.data.keys().hasAll(['name', 'email', 'message', 'timestamp']) &&
+        request.resource.data.name is string &&
+        request.resource.data.email is string &&
+        request.resource.data.message is string &&
+        request.resource.data.timestamp is timestamp;
+
+      allow read, update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

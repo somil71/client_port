@@ -718,6 +718,35 @@ a {
   overflow: hidden;
 }
 
+.cinema-embed-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 155, 113, 0.12), transparent 25%),
+    linear-gradient(145deg, rgba(20, 16, 16, 1), rgba(8, 8, 9, 1));
+}
+
+.cinema-embed {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.cinema-screen-meta {
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 3;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 8, 9, 0.68);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 1rem 1.1rem;
+}
+
 .cinema-bars {
   position: absolute;
   left: 0;
@@ -755,6 +784,27 @@ a {
   padding: 0.8rem 1rem;
   white-space: nowrap;
   color: rgba(255, 255, 255, 0.62);
+}
+
+.cinema-thumb {
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.cinema-thumb-placeholder {
+  min-height: 7rem;
+  display: flex;
+  align-items: end;
+  justify-content: start;
+  padding: 1rem;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 155, 113, 0.18), transparent 25%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
 }
 
 .page-contact {

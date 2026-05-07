@@ -7,11 +7,29 @@
       name="description"
       content="Somil's creative portfolio featuring graphic design, sketching, animation, video editing, filmmaking, VFX, and contact information."
     />
+    <meta property="og:title" content="Somil Portfolio | Creative Designer and Motion Work" />
+    <meta property="og:description" content="Creative portfolio featuring graphic design, sketching, animation, video editing, filmmaking, VFX, and contact information." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://client-port.example.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Somil Portfolio | Creative Designer and Motion Work" />
+    <meta name="twitter:description" content="Creative portfolio featuring graphic design, sketching, animation, video editing, filmmaking, VFX, and contact information." />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <title>Somil Portfolio | Creative Designer and Motion Work</title>
   </head>
   <body class="bg-background text-on-surface dark">
     <div id="root"></div>
+    <script type="module">
+      const plausibleDomain = import.meta.env.VITE_PLAUSIBLE_DOMAIN
+
+      if (import.meta.env.PROD && plausibleDomain) {
+        const script = document.createElement('script')
+        script.defer = true
+        script.setAttribute('data-domain', plausibleDomain)
+        script.src = 'https://plausible.io/js/script.js'
+        document.head.appendChild(script)
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

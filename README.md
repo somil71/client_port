@@ -1,86 +1,471 @@
-# AETHER VFX Portfolio
+# client_port
 
-A modern, full-stack VFX portfolio application built with React, TypeScript, Tailwind CSS, Firebase, and Clerk authentication.
+A multi-page creative portfolio built with React, TypeScript, Vite, Tailwind CSS, Framer Motion, and Firebase.
 
-## Features
+This project is designed as a presentation-first portfolio website. It combines page-based storytelling, strong visual styling, responsive layout work, and a lightweight backend integration for contact submissions. The site is intended to feel polished and cinematic while still being practical to extend and deploy.
 
-- **Responsive Design**: Beautiful dark-themed UI optimized for all devices
-- **Authentication**: Secure user authentication with Clerk
-- **Contact Management**: Store contact form submissions in Firebase
-- **SEO Optimized**: Proper meta tags and structure
-- **Performance**: Fast loading with Vite and optimized components
-- **Modern Stack**: React 18, TypeScript, Tailwind CSS, Framer Motion
+## Overview
+
+The app is a client-side React SPA with route-based navigation and page-specific visual treatments.
+
+Core goals of the project:
+
+- Present a complete portfolio with dedicated pages for `Home`, `About`, `Portfolio`, `Showreel`, and `Contact`
+- Use motion and visual styling to make the site feel more authored than a basic template
+- Keep the codebase approachable for iteration and content updates
+- Support contact form persistence through Firebase Firestore
+- Remain responsive and production-buildable with a simple toolchain
 
 ## Tech Stack
 
-- **Frontend**: React 18 + TypeScript
-- **Styling**: Tailwind CSS
-- **Build Tool**: Vite
-- **Authentication**: Clerk
-- **Backend**: Firebase (Firestore, Auth, Storage)
-- **Animation**: Framer Motion
-- **Routing**: React Router v6
+### Frontend
+
+- React 18
+- TypeScript
+- React Router v6
+- Framer Motion
+
+### Styling
+
+- Tailwind CSS
+- Custom global CSS in `src/index.css`
+- Google Fonts
+
+### Build Tooling
+
+- Vite
+- ESLint
+- PostCSS
+
+### Backend / Data
+
+- Firebase App SDK
+- Firestore for contact form submissions
+
+## Current Architecture
+
+This is a frontend-heavy architecture with a single backend integration point.
+
+### High-level flow
+
+1. `main.tsx` mounts the React application.
+2. `App.tsx` sets up routing and lazy-loads route pages.
+3. `Navigation.tsx` provides top-level navigation and route awareness.
+4. Each page component renders its own content and uses `PageMeta.tsx` for document title and description.
+5. `Contact.tsx` writes form submissions into Firestore using the shared Firebase config.
+
+### App shell
+
+The app shell is intentionally simple:
+
+- a top navigation bar
+- a grain overlay for texture
+- route-based page rendering
+- a skeleton fallback while lazy-loaded pages are resolving
+
+This keeps the app lightweight while still supporting multi-page presentation.
 
 ## Project Structure
 
-```
+```text
 src/
-├── pages/
-│   ├── Home.tsx
-│   ├── Work.tsx
-│   ├── About.tsx
-│   ├── Showreel.tsx
-│   └── Contact.tsx
-├── components/
-│   └── Navigation.tsx
-├── config/
-│   └── firebase.ts
-├── assets/
-│   └── icons.ts
-├── App.tsx
-├── main.tsx
-└── index.css
+  assets/
+    icons.ts
+  components/
+    Navigation.tsx
+    PageMeta.tsx
+  config/
+    firebase.ts
+  pages/
+    About.tsx
+    Contact.tsx
+    Home.tsx
+    Showreel.tsx
+    Work.tsx
+  App.tsx
+  index.css
+  main.tsx
+  vite-env.d.ts
 ```
 
-## Getting Started
+### What each area does
+
+- `assets/`
+  Holds small reusable UI assets such as navigation icons.
+
+- `components/`
+  Holds shared UI building blocks used across multiple pages.
+
+- `config/`
+  Holds environment-based setup code. Right now this is Firebase initialization.
+
+- `pages/`
+  Holds route-level page components. Each file maps to a visible page in the site.
+
+- `index.css`
+  Central styling file. This is where most visual identity decisions, design tokens, layout helpers, and component utility styles live.
+
+## Routing
+
+Defined in `src/App.tsx`.
+
+Current routes:
+
+- `/` → Home
+- `/about` → About
+- `/portfolio` → Portfolio
+- `/work` → Portfolio alias
+- `/showreel` → Showreel
+- `/contact` → Contact
+
+### Routing strategy
+
+- Uses `BrowserRouter`
+- Uses `Routes` and `Route` from React Router v6
+- Uses `React.lazy` and `Suspense` for route-level code splitting
+
+This keeps initial load smaller and keeps route files independent.
+
+## Page-by-Page Design Intent
+
+### 1. Home
+
+Purpose:
+
+- Set the tone of the portfolio
+- Introduce the creative direction
+- Give the user a strong first impression
+
+Design role:
+
+- cinematic landing page
+- atmospheric hero
+- visual motion and abstract presentation
+
+Typical content:
+
+- hero statement
+- supporting copy
+- CTA buttons
+- layered / styled presentation blocks
+
+### 2. About
+
+Purpose:
+
+- act like a CV / resume page
+- explain background, skills, and experience
+
+Design role:
+
+- structured and information-rich
+- more editorial and grid-oriented than Home
+
+Typical content:
+
+- personal details
+- education
+- skills
+- experience
+- achievements
+
+### 3. Portfolio (`Work.tsx`)
+
+Purpose:
+
+- show categorized creative work
+- act as the main archive of projects
+
+Design role:
+
+- project presentation system
+- filterable layout
+- stronger information density than Home
+
+Typical content:
+
+- category filters
+- project cards
+- project descriptions
+- preview visuals
+
+### 4. Showreel
+
+Purpose:
+
+- present motion-first work in a more focused format
+
+Design role:
+
+- showcase page for reels and motion content
+- visually darker and more playback-oriented
+
+Typical content:
+
+- selected reel
+- reel descriptions
+- reel list / chapter-like switching
+
+### 5. Contact
+
+Purpose:
+
+- let visitors reach out
+- store inquiries in Firestore
+
+Design role:
+
+- cleaner utility page
+- form-first layout
+
+Typical content:
+
+- contact summary
+- direct contact methods
+- inquiry form
+
+## Design System and Styling Approach
+
+The project uses a hybrid styling strategy:
+
+- Tailwind utility classes for local layout and spacing
+- custom semantic classes in `src/index.css` for reusable visual systems
+
+### Why this hybrid approach works here
+
+For a portfolio project, pure utility-only styling often becomes noisy for expressive UI. This project uses Tailwind for fast composition and a custom CSS layer for:
+
+- global visual identity
+- repeated motion surfaces
+- page shells
+- special cards / panels
+- theme-specific section treatments
+
+### Core visual concepts currently present
+
+- dark cinematic backgrounds
+- glass-like panels
+- soft bloom and glow
+- textured grain overlay
+- expressive heading typography
+- rounded surfaces with layered borders
+
+### Key global classes
+
+Examples from `src/index.css`:
+
+- `.page-shell`
+- `.section-frame`
+- `.glass-card`
+- `.glass-panel`
+- `.eyebrow`
+- `.display-hero`
+- `.section-title`
+- `.primary-link`
+- `.secondary-link`
+- `.contact-input`
+
+These act like reusable UI primitives.
+
+### Typography
+
+Two fonts are imported:
+
+- `Inter`
+- `Space Grotesk`
+
+Usage pattern:
+
+- `Inter` for body text and UI readability
+- `Space Grotesk` for headings and stronger visual emphasis
+
+### Responsive strategy
+
+Responsiveness is handled by:
+
+- Tailwind breakpoint utilities
+- flexible grid layouts
+- `max-w-*` container constraints
+- mobile-first stacking
+
+The site is designed to degrade gracefully from multi-column desktop layouts to stacked mobile sections.
+
+## Animation and Motion
+
+Framer Motion is used for motion and entrance effects.
+
+### Typical animation use cases in this codebase
+
+- initial fade / slide-in for sections
+- scroll-linked transforms via `useScroll` and `useTransform`
+- subtle parallax-like behavior
+- in-view reveal animations
+
+### Why Framer Motion is a good fit here
+
+- easy route/page animation support
+- good integration with React state and JSX
+- simple expressive APIs for scroll-linked motion
+- low friction for portfolio-style animation patterns
+
+## Backend Logic
+
+This project does not use a custom Node/Express backend.
+
+Instead, it uses Firebase as a backend service.
+
+### What Firebase is currently used for
+
+- Firestore writes from the contact form
+
+### Firebase config
+
+Located in:
+
+- `src/config/firebase.ts`
+
+It:
+
+- reads Firebase credentials from Vite env variables
+- initializes the Firebase app
+- exports a Firestore instance as `db`
+
+### Contact form data flow
+
+In `src/pages/Contact.tsx`:
+
+1. Form state is stored in React component state.
+2. On submit, the handler prevents default browser submission.
+3. Loading and error state are managed locally.
+4. `addDoc()` writes the form payload into the Firestore collection `contact_messages`.
+5. `serverTimestamp()` is used so the submission gets a backend timestamp.
+6. UI success and error messages are shown based on the result.
+
+### Submission schema
+
+The Firestore document currently includes:
+
+- `name`
+- `email`
+- `phone`
+- `projectType`
+- `budget`
+- `message`
+- `timestamp`
+- `status`
+
+This is a good base if you later want:
+
+- an admin dashboard
+- email triggers
+- filtering by project type
+- status updates for leads
+
+## SEO and Metadata
+
+The project uses a small reusable metadata component:
+
+- `src/components/PageMeta.tsx`
+
+What it does:
+
+- updates `document.title`
+- ensures a `meta[name="description"]` exists
+- updates the description dynamically per page
+
+This gives each route a cleaner SEO baseline without bringing in a heavier head-management library.
+
+## State Management
+
+This project uses local component state only.
+
+That is appropriate for the current scope because:
+
+- there is no complex shared application state
+- each page owns its own temporary UI state
+- route state is handled by React Router
+- form state is isolated to the contact page
+
+Examples:
+
+- mobile nav toggle in `Navigation.tsx`
+- contact form state in `Contact.tsx`
+- selected category in `Work.tsx`
+- selected reel / active state in `Showreel.tsx`
+
+## Performance Notes
+
+The project already uses some sensible baseline performance practices:
+
+- Vite for fast dev and optimized builds
+- route-level lazy loading
+- simple SPA architecture
+- no heavyweight custom backend bundle
+
+Potential future improvements:
+
+- replace generated placeholder visuals with optimized real media
+- split heavier motion or media components further if needed
+- audit bundle size if adding video or 3D libraries
+
+## Environment Variables
+
+Expected environment variables are documented in `.env.local.example`.
+
+Current values needed:
+
+```env
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+```
+
+### Important note
+
+`.env.local` is intentionally ignored by Git.
+
+Do not commit real Firebase credentials or any private config.
+
+## Installation
 
 ### Prerequisites
 
-- Node.js 16.x or higher
-- npm or yarn
+- Node.js 16+ recommended
+- npm
 
-### Installation
+### Steps
 
-1. **Clone the repository**
+1. Clone the repo
+
 ```bash
-git clone <your-repo-url>
-cd port2
+git clone https://github.com/somil71/client_port.git
+cd client_port
 ```
 
-2. **Install dependencies**
+2. Install dependencies
+
 ```bash
 npm install
 ```
 
-3. **Set up environment variables**
+3. Create local env file
+
 ```bash
-cp .env.local.example .env.local
+copy .env.local.example .env.local
 ```
 
-Edit `.env.local` and add your Firebase and Clerk credentials:
+4. Fill in your Firebase values inside `.env.local`
 
-```env
-# Firebase
-VITE_FIREBASE_API_KEY=your_firebase_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
+5. Start development server
 
-# Clerk
-VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+```bash
+npm run dev
 ```
+
+## Available Scripts
 
 ### Development
 
@@ -88,166 +473,117 @@ VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 npm run dev
 ```
 
-The app will open at `http://localhost:3000`
+Starts the Vite dev server.
 
-### Build
+### Production build
 
 ```bash
 npm run build
 ```
 
-### Preview Production Build
+Runs TypeScript compilation and creates a production build in `dist/`.
+
+### Preview production build
 
 ```bash
 npm run preview
 ```
 
-## Firebase Setup
+Serves the built project locally for testing.
 
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a new project
-3. Enable Firestore Database
-4. Create a collection called `contact_messages`
-5. Set up security rules (allow authenticated users to write)
-6. Copy your project credentials to `.env.local`
+### Lint
 
-### Firestore Rules Example
-
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /contact_messages/{document=**} {
-      allow write: if request.auth != null;
-      allow read: if request.auth != null && request.auth.token.email in ['admin@example.com'];
-    }
-  }
-}
+```bash
+npm run lint
 ```
 
-## Clerk Setup
-
-1. Go to [Clerk](https://clerk.com/)
-2. Create a new application
-3. Choose React as your framework
-4. Copy your Publishable Key to `.env.local`
-5. Set up sign-in/sign-up methods in Clerk Dashboard
-
-## Pages
-
-### Home
-- Hero section with CTA buttons
-- Featured projects grid
-- Statistics section
-- Call-to-action for getting in touch
-
-### Work
-- Portfolio grid with filtering
-- Project categories
-- Detailed project cards
-- Load more functionality
-
-### About
-- Company story and mission
-- Key achievements
-- Services offered
-- Leadership team
-- Core values
-
-### Showreel
-- Video player with playlist
-- Multiple showreel options
-- Behind-the-scenes content
-- Subscription CTA
-
-### Contact
-- Contact form with Firebase integration
-- Clerk authentication requirement
-- Contact information
-- FAQ section
-- Form validation and submission handling
-
-## Customization
-
-### Tailwind Configuration
-Edit `tailwind.config.js` to customize colors, spacing, and other design tokens.
-
-### Components
-All components use TypeScript and Tailwind CSS. Modify them in the `src/components/` directory.
-
-### Pages
-Update page content in `src/pages/` directory.
+Runs ESLint on the project.
 
 ## Deployment
 
-### Deploy to Vercel (Recommended)
+This project is well-suited for static frontend hosting.
 
-```bash
-npm install -g vercel
-vercel
-```
+Good options:
 
-### Deploy to Netlify
+- Vercel
+- Netlify
+- Firebase Hosting
+- GitHub Pages with some router considerations
 
-```bash
-npm run build
-# Upload dist folder to Netlify
-```
+### Deployment requirements
 
-### Environment Variables
-Add the same environment variables to your hosting platform's configuration.
+- build the app with `npm run build`
+- provide Firebase env variables in the deployment platform
+- ensure SPA fallback is configured if needed
 
-## Performance Tips
+## Firestore Setup
 
-- Images should be optimized and lazy-loaded
-- Use React.memo for expensive components
-- Leverage code splitting with React Router
-- Monitor bundle size with `npm run build`
+Create a Firestore collection:
 
-## Security
+- `contact_messages`
 
-- Never commit `.env.local` to version control
-- Use Firebase Security Rules for data protection
-- Enable Clerk's security features
-- Validate all form inputs server-side
+Suggested minimal rules depend on your desired behavior.
 
-## Troubleshooting
+Because the frontend writes directly to Firestore, you should define rules carefully. If you want public contact form submissions, your rules must allow controlled writes. If you want stricter handling, consider moving writes behind Cloud Functions later.
 
-### Firebase Connection Issues
-- Verify API credentials in `.env.local`
-- Check Firebase project is active
-- Ensure security rules allow your app
+## Current Limitations
 
-### Clerk Authentication Errors
-- Check Publishable Key is correct
-- Verify sign-in/sign-up methods are configured
-- Clear browser cache and cookies
+A few important realities about the current project:
 
-### Styling Issues
-- Run `npm run build` to ensure Tailwind compiles
-- Check Tailwind content paths in config
-- Clear `.next` or `dist` folder and rebuild
+- it is frontend-first, not a full custom backend app
+- it uses generated/placeholder presentation for some portfolio visuals
+- showreel/player behavior is presentation-oriented, not a real media pipeline
+- there is no CMS yet
+- there is no authentication layer in the current committed version
 
-## Contributing
+## How to Extend the Project
 
-1. Create a feature branch
-2. Make your changes
-3. Test thoroughly
-4. Submit a pull request
+Natural next steps:
 
-## License
+- replace placeholder graphics with real portfolio assets
+- connect real video media to the showreel page
+- add project detail pages or modal case studies
+- trigger emails from Firestore submissions
+- add analytics
+- add sitemap and richer SEO metadata
+- add an admin dashboard for managing leads
 
-This project is licensed under the MIT License.
+## Design Philosophy
 
-## Support
+This codebase is built around a presentation principle:
 
-For issues and questions, please open an issue on GitHub or contact us at hello@aethervfx.com
+> the portfolio itself should demonstrate design thinking, not just contain examples of it
 
-## Next Steps
+That means:
 
-1. Add real project images and videos
-2. Integrate email service for contact form
-3. Add blog functionality
-4. Implement analytics
-5. Add sitemap and robots.txt
-6. Set up CI/CD pipeline
+- layout matters as much as content
+- motion supports storytelling
+- typography is part of the interface voice
+- page structure is deliberate, not generic
+
+## File Reference Guide
+
+If you want to modify the project quickly, start here:
+
+- Routing: [src/App.tsx](C:/Users/Somil/Desktop/port2/src/App.tsx)
+- Global styles: [src/index.css](C:/Users/Somil/Desktop/port2/src/index.css)
+- Navigation: [src/components/Navigation.tsx](C:/Users/Somil/Desktop/port2/src/components/Navigation.tsx)
+- SEO metadata: [src/components/PageMeta.tsx](C:/Users/Somil/Desktop/port2/src/components/PageMeta.tsx)
+- Firebase config: [src/config/firebase.ts](C:/Users/Somil/Desktop/port2/src/config/firebase.ts)
+- Home page: [src/pages/Home.tsx](C:/Users/Somil/Desktop/port2/src/pages/Home.tsx)
+- About page: [src/pages/About.tsx](C:/Users/Somil/Desktop/port2/src/pages/About.tsx)
+- Portfolio page: [src/pages/Work.tsx](C:/Users/Somil/Desktop/port2/src/pages/Work.tsx)
+- Showreel page: [src/pages/Showreel.tsx](C:/Users/Somil/Desktop/port2/src/pages/Showreel.tsx)
+- Contact page: [src/pages/Contact.tsx](C:/Users/Somil/Desktop/port2/src/pages/Contact.tsx)
+
+## Summary
+
+This project is a React + TypeScript creative portfolio that combines:
+
+- route-based storytelling
+- motion-driven UI
+- custom CSS visual systems
+- responsive layout design
+- Firestore-backed contact capture
+
+It is best understood as a design-led frontend application with a lightweight backend service layer, built to showcase both creative work and implementation ability.

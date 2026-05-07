@@ -4,6 +4,7 @@ import Navigation from './components/Navigation'
 
 const Home = lazy(() => import('./pages/Home'))
 const Work = lazy(() => import('./pages/Work'))
+const WorkDetail = lazy(() => import('./pages/WorkDetail'))
 const About = lazy(() => import('./pages/About'))
 const Showreel = lazy(() => import('./pages/Showreel'))
 const Contact = lazy(() => import('./pages/Contact'))
@@ -19,6 +20,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/portfolio" element={<Work />} />
             <Route path="/work" element={<Work />} />
+            <Route path="/work/:slug" element={<WorkDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/showreel" element={<Showreel />} />
             <Route path="/contact" element={<Contact />} />

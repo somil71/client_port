@@ -75,6 +75,7 @@ export default function Contact() {
       <PageMeta
         title="Somil Portfolio | Contact"
         description="Contact page with phone, email, social links, and a working contact form."
+        url="https://client-port.example.com/contact"
       />
 
       <motion.div style={{ y: gridY }} className="contact-grid-overlay" />

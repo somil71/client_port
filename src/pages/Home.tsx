@@ -46,6 +46,7 @@ export default function Home() {
       <PageMeta
         title="Somil Portfolio | Home"
         description="Creative portfolio homepage with technical skills, creative achievements, and visual storytelling highlights."
+        url="https://client-port.example.com/"
       />
 
       <div className="floating-orb drift top-20 right-[8%] w-52 h-52 bg-primary/10" />
