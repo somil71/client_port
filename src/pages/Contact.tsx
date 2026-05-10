@@ -3,19 +3,8 @@ import { useState, type ChangeEvent, type FormEvent } from 'react'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import PageMeta from '../components/PageMeta'
 import { db } from '../config/firebase'
-
-const quickNotes = [
-  { label: 'Best for', value: 'Portfolio submissions, creative showcases, freelance inquiries, and project presentation help.' },
-  { label: 'Response style', value: 'Structured, project-focused, and easy to review for both academic and client work.' },
-  { label: 'Availability', value: 'Remote collaboration and digital submission support.' },
-]
-
-const contactBlocks = [
-  { label: 'Phone', value: '+91 XXXXX XXXXX', href: 'tel:+910000000000' },
-  { label: 'Email', value: 'hello@yourportfolio.com', href: 'mailto:hello@yourportfolio.com' },
-  { label: 'LinkedIn', value: 'linkedin.com/in/your-profile', href: 'https://www.linkedin.com/' },
-  { label: 'Instagram', value: 'instagram.com/your-handle', href: 'https://www.instagram.com/' },
-]
+import { getSiteUrl } from '../config/site'
+import { contactContent, seoContent } from '../data/siteContent'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -43,6 +32,12 @@ export default function Contact() {
     e.preventDefault()
     setLoading(true)
     setError('')
+
+    if (!db) {
+      setError('The contact form is not configured yet. Please use the direct email or social links for now.')
+      setLoading(false)
+      return
+    }
 
     try {
       await addDoc(collection(db, 'contact_messages'), {
@@ -73,9 +68,9 @@ export default function Contact() {
   return (
     <div className="page-shell page-contact min-h-screen pt-24 px-6 lg:px-24">
       <PageMeta
-        title="Somil Portfolio | Contact"
-        description="Contact page with phone, email, social links, and a working contact form."
-        url="https://client-port.example.com/contact"
+        title={seoContent.contactTitle}
+        description={seoContent.contactDescription}
+        url={getSiteUrl('/contact')}
       />
 
       <motion.div style={{ y: gridY }} className="contact-grid-overlay" />
@@ -85,19 +80,18 @@ export default function Contact() {
           <div className="space-y-6 min-w-0">
             <span className="interface-kicker">Contact / Interface mode</span>
             <h1 className="interface-title">
-              Less poster.
-              <span className="block accent-text">More signal flow.</span>
+              {contactContent.title}
+              <span className="block accent-text">Open for cinematic and design-driven collaborations.</span>
             </h1>
             <p className="text-[#c7b8a7] text-lg leading-relaxed max-w-xl">
-              This page shifts again into a cleaner systems aesthetic: grid overlays, connection lines,
-              panel logic, and scroll movement that feels like navigating an interface rather than a promo page.
+              {contactContent.intro}
             </p>
           </div>
 
           <div className="interface-panel p-6 lg:p-7 min-w-0">
             <p className="interface-kicker mb-5">Quick notes</p>
             <div className="grid gap-4">
-              {quickNotes.map((note, idx) => (
+              {contactContent.quickNotes.map((note, idx) => (
                 <motion.div
                   key={note.label}
                   initial={{ opacity: 0, x: 18 }}
@@ -154,11 +148,11 @@ export default function Contact() {
                 <label className="interface-label">Project type</label>
                 <select name="projectType" value={formData.projectType} onChange={handleChange} required className="contact-input">
                   <option value="">Choose a direction</option>
-                  <option value="graphic-design">Graphic Design</option>
-                  <option value="animation">2D Animation / Motion Graphics</option>
-                  <option value="editing">Video Editing / Filmmaking</option>
                   <option value="vfx">VFX / Compositing</option>
-                  <option value="portfolio">Portfolio review</option>
+                  <option value="animation">2D Animation / Motion Design</option>
+                  <option value="editing">Video Editing / Post-Production</option>
+                  <option value="branding">Brand Identity Design</option>
+                  <option value="storyboarding">Storyboarding / Concept Layouts</option>
                 </select>
               </div>
               <div className="sm:col-span-2">
@@ -167,7 +161,7 @@ export default function Contact() {
                   <option value="">Select a budget range</option>
                   <option value="academic">Academic / student project</option>
                   <option value="starter">Starter freelance scope</option>
-                  <option value="standard">Standard project scope</option>
+                  <option value="standard">Standard production scope</option>
                   <option value="extended">Extended collaboration</option>
                 </select>
               </div>
@@ -180,7 +174,7 @@ export default function Contact() {
                   required
                   rows={7}
                   className="contact-input resize-none"
-                  placeholder="Tell me which category of work you are asking about and what kind of project support you need."
+                  placeholder="Tell me about your idea, the kind of visual work you need, and any references or timelines you already have in mind."
                 />
               </div>
               <div className="sm:col-span-2 pt-2">
@@ -192,23 +186,31 @@ export default function Contact() {
           </motion.div>
 
           <div className="space-y-5 min-w-0">
-            {contactBlocks.map((item, idx) => (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                target={item.href.startsWith('http') ? '_blank' : undefined}
-                rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
-                initial={{ opacity: 0, x: 18 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.55, delay: idx * 0.08 }}
-                className="interface-panel interface-link block p-6"
-              >
-                <p className="text-xs uppercase tracking-[0.28em] text-white/40 mb-3">{item.label}</p>
-                <h3 className="text-2xl font-grotesk mb-1 text-[#f4efe7]">{item.value}</h3>
-                <p className="text-[#c7b8a7] leading-relaxed">Direct signal path.</p>
-              </motion.a>
-            ))}
+            {contactContent.contactBlocks.map((item, idx) => {
+              const CardTag = item.href ? motion.a : motion.div
+
+              return (
+                <CardTag
+                  key={item.label}
+                  {...(item.href
+                    ? {
+                        href: item.href,
+                        target: item.href.startsWith('http') ? '_blank' : undefined,
+                        rel: item.href.startsWith('http') ? 'noreferrer' : undefined,
+                      }
+                    : {})}
+                  initial={{ opacity: 0, x: 18 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.55, delay: idx * 0.08 }}
+                  className="interface-panel interface-link block p-6"
+                >
+                  <p className="text-xs uppercase tracking-[0.28em] text-white/40 mb-3">{item.label}</p>
+                  <h3 className="text-2xl font-grotesk mb-1 text-[#f4efe7] break-words">{item.value}</h3>
+                  <p className="text-[#c7b8a7] leading-relaxed">Direct signal path.</p>
+                </CardTag>
+              )
+            })}
           </div>
         </section>
       </div>

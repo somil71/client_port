@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { menu, close } from '../assets/icons'
+import { siteIdentity } from '../data/siteContent'
 
 const navLinks = [
   { id: 'home', title: 'Home', href: '/' },
@@ -21,12 +22,12 @@ export default function Navigation() {
       <div className="max-w-6xl mx-auto px-6 lg:px-24 py-5 flex items-center justify-between gap-6">
         <Link to="/" className="flex items-center gap-3" onClick={() => setToggle(false)}>
           <div className="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center">
-            <span className="font-grotesk text-sm accent-text">S</span>
+            <span className="font-grotesk text-sm accent-text">V</span>
           </div>
           <div>
-            <p className="font-grotesk text-lg leading-none">Somil</p>
+            <p className="font-grotesk text-lg leading-none">{siteIdentity.brandName}</p>
             <p className="text-[0.7rem] uppercase tracking-[0.28em] text-white/40 mt-1">
-              Visual storyteller
+              {siteIdentity.professionalTitle}
             </p>
           </div>
         </Link>

@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion'
 import { Link, useParams } from 'react-router-dom'
 import PageMeta from '../components/PageMeta'
-import { getCategoryLabel, previewMedia, projects } from '../data/projects'
+import { getSiteUrl } from '../config/site'
+import { getCategoryLabel, getYouTubeThumbnail, previewMedia, projects } from '../data/projects'
+import { seoContent, siteIdentity } from '../data/siteContent'
 
 export default function WorkDetail() {
   const { slug } = useParams()
@@ -11,9 +13,9 @@ export default function WorkDetail() {
     return (
       <div className="page-shell page-work min-h-screen pt-24 px-6 lg:px-24">
         <PageMeta
-          title="Somil Portfolio | Project Not Found"
-          description="Placeholder portfolio detail page for a missing project."
-          url="https://client-port.example.com/work/not-found"
+          title={seoContent.notFoundTitle}
+          description="Portfolio detail route for a project that could not be found."
+          url={getSiteUrl('/work/not-found')}
           ogType="article"
         />
 
@@ -27,7 +29,7 @@ export default function WorkDetail() {
             <p className="eyebrow mb-4">Project detail</p>
             <h1 className="section-title mb-4">Project not found</h1>
             <p className="muted-copy mb-8 max-w-2xl">
-              This placeholder detail route could not match a project slug. Head back to the portfolio archive and open one of the listed case-study links.
+              This detail route could not match a project slug. Head back to the portfolio archive and open one of the listed case-study links.
             </p>
             <Link to="/portfolio" className="primary-link">
               Back to portfolio
@@ -39,13 +41,14 @@ export default function WorkDetail() {
   }
 
   const categoryLabel = getCategoryLabel(project.category)
+  const mediaLinks = project.mediaLinks ?? []
 
   return (
     <div className="page-shell page-work min-h-screen pt-24 px-6 lg:px-24">
       <PageMeta
-        title={`Somil Portfolio | ${project.title}`}
-        description={`${project.title} project detail page with placeholder hero, process summary, tools used, and category context.`}
-        url={`https://client-port.example.com/work/${project.slug}`}
+        title={`${siteIdentity.brandName} | ${project.title}`}
+        description={`${project.title} project detail page with summary, tools used, media links, and category context.`}
+        url={getSiteUrl(`/work/${project.slug}`)}
         ogType="article"
       />
 
@@ -72,12 +75,12 @@ export default function WorkDetail() {
               <div className="rounded-[1.7rem] overflow-hidden border border-white/10">
                 <img
                   src={previewMedia(project.title, project.mediaType, project.palette)}
-                  alt={`${project.title} hero placeholder`}
+                  alt={`${project.title} hero preview`}
                   className="w-full min-h-[18rem] lg:min-h-[28rem] object-cover"
                 />
               </div>
               <p className="muted-copy text-sm leading-relaxed">
-                Placeholder hero image: replace this generated frame with the final project hero visual, poster, render, or motion still.
+                Preview frame shown here until the final project hero visual, poster, render, or motion still is added.
               </p>
             </div>
 
@@ -99,7 +102,7 @@ export default function WorkDetail() {
                 <div className="glass-panel rounded-[1.5rem] p-5">
                   <p className="eyebrow mb-3">Description</p>
                   <p className="muted-copy leading-relaxed">
-                    {project.detail} This is clearly labeled placeholder content for the expanded case-study narrative until final project materials are added.
+                    {project.detail}
                   </p>
                 </div>
 
@@ -113,6 +116,55 @@ export default function WorkDetail() {
                     ))}
                   </div>
                 </div>
+
+                {mediaLinks.length > 0 && (
+                  <div className="glass-panel rounded-[1.5rem] p-5">
+                    <div className="flex flex-col gap-2 mb-4">
+                      <p className="eyebrow">Project links</p>
+                      <p className="muted-copy text-sm leading-relaxed">
+                        Selected published clips are linked here as supporting media instead of being embedded all at once.
+                      </p>
+                    </div>
+
+                    <div className="grid gap-3">
+                      {mediaLinks.map((mediaLink) => {
+                        const thumbnail = getYouTubeThumbnail(mediaLink.url)
+
+                        return (
+                          <a
+                            key={mediaLink.url}
+                            href={mediaLink.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="work-detail-link-card"
+                          >
+                            {thumbnail ? (
+                              <img
+                                src={thumbnail}
+                                alt={`${mediaLink.title} thumbnail`}
+                                className="work-detail-link-thumb"
+                                loading="lazy"
+                              />
+                            ) : (
+                              <div className="work-detail-link-thumb work-detail-link-thumb-placeholder">
+                                {mediaLink.label}
+                              </div>
+                            )}
+
+                            <div className="min-w-0">
+                              <p className="text-xs uppercase tracking-[0.24em] text-white/42 mb-2">
+                                {mediaLink.label}
+                              </p>
+                              <h2 className="text-lg font-grotesk leading-tight break-words">
+                                {mediaLink.title}
+                              </h2>
+                            </div>
+                          </a>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
