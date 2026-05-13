@@ -195,7 +195,7 @@ export default function Work() {
 
           <div className="mb-12 grid gap-4 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-end">
             <p className="eyebrow">{activeCategoryCopy.eyebrow} / {getCategoryLabel(activeFilter)}</p>
-            <p className="max-w-3xl text-sm leading-relaxed text-white/58 lg:text-base">
+            <p className="max-w-3xl text-sm leading-relaxed text-white/72 lg:text-base">
               {activeCategoryCopy.blurb}
             </p>
           </div>
@@ -336,6 +336,7 @@ function ProjectCard({
   const cardSpan = 'xl:col-span-6'
   const cardLabel = getCategoryLabel(project.category)
   const tags = project.tools.slice(0, 3)
+  const previewImage = project.heroImage ?? previewMedia(project.title, project.mediaType, project.palette)
 
   return (
     <motion.div
@@ -350,7 +351,7 @@ function ProjectCard({
         <div className={`grid gap-6 ${isFeatured ? 'lg:grid-cols-[minmax(0,1.08fr)_minmax(20rem,0.92fr)]' : 'lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.9fr)]'}`}>
           <div className="work-playhead-image">
             <img
-              src={previewMedia(project.title, project.mediaType, project.palette)}
+              src={previewImage}
               alt={`${project.title} preview`}
               className="h-full w-full object-cover"
             />

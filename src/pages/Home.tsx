@@ -8,7 +8,7 @@ export default function Home() {
   const { scrollYProgress } = useScroll()
   const heroY = useTransform(scrollYProgress, [0, 0.25], [0, -80])
   const heroGlowY = useTransform(scrollYProgress, [0, 0.25], [0, 120])
-  const stripX = useTransform(scrollYProgress, [0.1, 0.55], ['0%', '-12%'])
+  const stripX = useTransform(scrollYProgress, [0.1, 0.55], ['0%', '0%'])
 
   return (
     <div className="page-shell w-full min-h-screen pt-24 px-6 lg:px-24">
@@ -27,16 +27,16 @@ export default function Home() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
-          className="grid xl:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] gap-10 xl:gap-14 items-center mb-24 lg:mb-32"
+          className="grid xl:grid-cols-[minmax(0,0.86fr)_minmax(24rem,1.14fr)] gap-10 xl:gap-14 items-center mb-24 lg:mb-32 min-h-[calc(100vh-10rem)]"
         >
-          <div className="space-y-8 min-w-0">
+          <div className="space-y-6 min-w-0">
             <span className="eyebrow">{homepageContent.eyebrow}</span>
-            <div className="space-y-6">
-              <h1 className="display-hero max-w-4xl">
-                {siteIdentity.heroHeadline}
-                <span className="block accent-text">{siteIdentity.heroSupportingHeadline}</span>
+            <div className="space-y-5">
+              <h1 className="display-hero max-w-[10ch] text-[clamp(3.1rem,7vw,6.2rem)] leading-[0.92]">
+                Where imagination meets
+                <span className="block accent-text">animation and VFX.</span>
               </h1>
-              <p className="muted-copy text-lg lg:text-xl max-w-2xl leading-relaxed">
+              <p className="muted-copy text-base lg:text-lg max-w-xl leading-relaxed">
                 {siteIdentity.heroIntro}
               </p>
             </div>
@@ -50,7 +50,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="flex flex-wrap gap-3 pt-4">
+            <div className="flex flex-wrap gap-3 pt-2 max-w-xl">
               {homepageContent.specialties.map((item) => (
                 <span key={item} className="pill text-sm muted-copy">
                   {item}
@@ -61,58 +61,52 @@ export default function Home() {
 
           <motion.div
             style={{ y: heroGlowY }}
-            className="section-frame editorial-card rounded-[2rem] p-6 lg:p-8 overflow-hidden w-full xl:max-w-[32rem] xl:ml-auto"
+            className="section-frame editorial-card rounded-[2rem] p-4 lg:p-5 overflow-hidden w-full xl:max-w-[38rem] xl:ml-auto xl:mt-20"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
-            <div className="relative min-h-[31rem] sm:min-h-[34rem] rounded-[1.5rem] overflow-hidden border border-white/10 bg-[radial-gradient(circle_at_top,_rgba(255,155,113,0.22),_transparent_38%),linear-gradient(180deg,_rgba(38,25,22,0.85),_rgba(13,10,10,0.95))]">
+            <div className="relative min-h-[30rem] sm:min-h-[32rem] rounded-[1.5rem] overflow-hidden border border-white/10 bg-[radial-gradient(circle_at_top,_rgba(255,155,113,0.22),_transparent_38%),linear-gradient(180deg,_rgba(38,25,22,0.85),_rgba(13,10,10,0.95))]">
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,10,0.18),rgba(8,8,10,0.4)_38%,rgba(8,8,10,0.84)_100%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(255,155,113,0.14),transparent_18%),radial-gradient(circle_at_74%_24%,rgba(130,197,255,0.1),transparent_16%),radial-gradient(circle_at_78%_72%,rgba(240,198,116,0.08),transparent_14%)]" />
               <motion.div
                 animate={{
-                  borderRadius: ['42% 58% 54% 46% / 44% 41% 59% 56%', '61% 39% 49% 51% / 53% 57% 43% 47%', '45% 55% 35% 65% / 43% 40% 60% 57%'],
-                  x: [0, 24, -10, 0],
-                  y: [0, -16, 12, 0],
-                  scale: [1, 1.08, 0.97, 1],
+                  x: [0, 16, -8, 0],
+                  y: [0, -14, 8, 0],
+                  scale: [1, 1.04, 0.98, 1],
                 }}
-                transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute left-[12%] top-[14%] h-44 w-44 morph-blob morph-blob-primary"
+                transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute left-[14%] top-[20%] h-44 w-44 rounded-full bg-[radial-gradient(circle_at_36%_36%,rgba(255,223,206,0.92),rgba(255,155,113,0.76)_46%,rgba(255,155,113,0.08)_78%)] blur-[16px]"
               />
               <motion.div
                 animate={{
-                  borderRadius: ['56% 44% 63% 37% / 49% 62% 38% 51%', '40% 60% 43% 57% / 64% 44% 56% 36%', '61% 39% 54% 46% / 41% 59% 41% 59%'],
-                  x: [0, -18, 8, 0],
-                  y: [0, 14, -12, 0],
-                  scale: [1, 0.94, 1.04, 1],
+                  x: [0, -14, 10, 0],
+                  y: [0, 10, -8, 0],
+                  scale: [1, 0.96, 1.03, 1],
                 }}
-                transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-                className="absolute right-[10%] top-[28%] h-36 w-36 morph-blob morph-blob-secondary"
+                transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+                className="absolute right-[16%] top-[38%] h-36 w-36 rounded-full bg-[radial-gradient(circle_at_38%_38%,rgba(255,244,212,0.82),rgba(240,198,116,0.68)_44%,rgba(240,198,116,0.05)_76%)] blur-[16px]"
               />
-              <div className="absolute inset-x-6 top-5 flex items-start justify-between gap-3">
-                <div className="pill text-xs max-w-[13rem] sm:max-w-none">{siteIdentity.professionalTitle}</div>
-                <div className="morph-status">
-                  <span className="morph-dot" />
-                  Creating live
-                </div>
+              <motion.div
+                animate={{
+                  x: [0, 8, -6, 0],
+                  y: [0, -8, 6, 0],
+                  scale: [1, 1.02, 0.99, 1],
+                }}
+                transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
+                className="absolute left-[56%] top-[18%] h-20 w-20 rounded-full bg-[radial-gradient(circle_at_35%_35%,rgba(166,220,255,0.78),rgba(115,170,224,0.48)_46%,rgba(115,170,224,0.04)_78%)] blur-[12px]"
+              />
+              <div className="absolute inset-x-6 top-6 flex items-start justify-between gap-3">
+                <div className="pill text-xs max-w-[15rem] sm:max-w-none">{siteIdentity.professionalTitle}</div>
               </div>
-              <div className="absolute left-6 right-6 top-[42%] z-10">
-                <div className="glass-panel rounded-[1.2rem] p-4">
-                  <p className="text-[0.68rem] uppercase tracking-[0.3em] text-white/45 mb-2">Core disciplines</p>
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                    <div className="morph-track">
-                      <motion.div
-                        animate={{ x: ['0%', '130%', '0%'] }}
-                        transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
-                        className="morph-node"
-                      />
-                    </div>
-                    <p className="text-sm muted-copy">design to motion to edit to VFX</p>
-                  </div>
+              <div className="absolute inset-x-0 bottom-0 p-6 lg:p-8">
+                <div className="rounded-[1.6rem] border border-white/10 bg-[linear-gradient(180deg,rgba(8,8,10,0.82),rgba(8,8,10,0.92))] p-5 backdrop-blur-md shadow-[0_24px_60px_rgba(0,0,0,0.34)]">
+                  <p className="text-[0.68rem] uppercase tracking-[0.3em] text-white/58 mb-3">
+                    Vision VFX
+                  </p>
+                  <p className="text-[1.85rem] lg:text-[2.2rem] font-grotesk max-w-md leading-[1.02] text-white">
+                    Storytelling, motion craft,
+                    <span className="block accent-soft">and cinematic atmosphere.</span>
+                  </p>
                 </div>
-              </div>
-              <div className="absolute bottom-0 inset-x-0 p-6 lg:p-8">
-                <p className="text-sm uppercase tracking-[0.3em] text-white/50 mb-3">Creative profile</p>
-                <p className="text-2xl lg:text-3xl font-grotesk max-w-sm leading-tight">
-                  Storytelling,
-                  <span className="block accent-soft">motion craft, and cinematic atmosphere.</span>
-                </p>
               </div>
             </div>
           </motion.div>
@@ -140,7 +134,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: idx * 0.08 }}
                 className="glass-card rounded-[1.75rem] p-6 bloom-shadow"
               >
-                <p className="text-xs uppercase tracking-[0.28em] text-white/45 mb-4">
+                <p className="text-xs uppercase tracking-[0.28em] text-white/60 mb-4">
                   0{idx + 1}
                 </p>
                 <h3 className="text-2xl font-grotesk mb-3">{item.title}</h3>
@@ -162,11 +156,13 @@ export default function Home() {
             </p>
           </div>
 
-          <motion.div style={{ x: stripX }} className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
-            {homepageContent.featuredProjects.map((project, idx) => (
-              <ParallaxCard key={project.title} index={idx} {...project} />
-            ))}
-          </motion.div>
+          <div className="overflow-visible py-3">
+            <motion.div style={{ x: stripX }} className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+              {homepageContent.featuredProjects.map((project, idx) => (
+                <ParallaxCard key={project.title} index={idx} {...project} />
+              ))}
+            </motion.div>
+          </div>
         </section>
 
         <section className="grid xl:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] gap-8 lg:gap-12 items-start mb-24 lg:mb-32">
@@ -230,8 +226,8 @@ type ParallaxCardProps = {
 
 function ParallaxCard({ title, format, summary, index }: ParallaxCardProps) {
   const { scrollYProgress } = useScroll()
-  const y = useTransform(scrollYProgress, [0.1, 0.8], [index * 14, index % 2 === 0 ? -40 : -18])
-  const rotate = useTransform(scrollYProgress, [0.1, 0.8], [0, index % 2 === 0 ? -2 : 2])
+  const y = useTransform(scrollYProgress, [0.1, 0.8], [index * 8, index % 2 === 0 ? -20 : -10])
+  const rotate = useTransform(scrollYProgress, [0.1, 0.8], [0, index % 2 === 0 ? -0.8 : 0.8])
 
   return (
     <motion.article
@@ -264,7 +260,7 @@ function ParallaxCard({ title, format, summary, index }: ParallaxCardProps) {
           />
         </div>
         <div className="space-y-3">
-          <p className="text-xs uppercase tracking-[0.28em] text-white/45">{format}</p>
+          <p className="text-xs uppercase tracking-[0.28em] text-white/60">{format}</p>
           <h3 className="text-2xl font-grotesk leading-tight">{title}</h3>
         </div>
       </div>

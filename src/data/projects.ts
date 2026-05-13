@@ -1,3 +1,6 @@
+import visionVfxThumbnail from '../img/WhatsApp Image 2026-05-12 at 5.53.57 PM.jpeg'
+import profilePortrait from '../img/WhatsApp Image 2026-05-12 at 5.53.45 PM.jpeg'
+
 export type CategoryId =
   | 'all'
   | 'graphic-design'
@@ -21,6 +24,7 @@ export type PortfolioItem = {
   description: string
   tools: string[]
   palette: string
+  heroImage?: string
   mediaLinks?: MediaLink[]
 }
 
@@ -28,6 +32,7 @@ export type MediaLink = {
   title: string
   url: string
   label: string
+  thumbnail?: string
 }
 
 export const categories: { id: CategoryId; label: string }[] = [
@@ -95,9 +100,32 @@ export const projects: PortfolioItem[] = [
       'This academic teaser concept re-edits and enhances footage from Baahubali: The Beginning to create a fresh viewing experience while preserving the source material’s larger-than-life scale. The project focuses on audio-visual synchronization, dramatic pacing, and carefully selected moments that sell scale and intensity in under a minute.',
     tools: ['Adobe Premiere Pro', 'YouTube Creator Tools', 'Trailer Editing', 'Sound Sync'],
     palette: '#FFC107',
+    heroImage: visionVfxThumbnail,
     mediaLinks: [
-      { title: 'Baahubali: The Beginning - Cinematic Teaser', url: 'https://youtu.be/GSnmDo4weBs?si=EuaPrjYz1cuKZHtH', label: 'Featured Reel' },
-      { title: 'Baahubali: The Beginning - Extended Trailer', url: 'https://youtu.be/4lHWa92B_7k?si=AtDMMozG9qI0tcky', label: 'Extended Cut' },
+      {
+        title: 'Premiere Pro Study 01',
+        url: 'https://youtu.be/Zo6WR8nRc34?si=_hA-LfKnieVzMO-Q',
+        label: 'Premiere Pro',
+        thumbnail: visionVfxThumbnail,
+      },
+      {
+        title: 'Premiere Pro Study 02',
+        url: 'https://youtu.be/kL-NHPc_I7o?si=m432n59p8woneSwT',
+        label: 'Premiere Pro',
+        thumbnail: visionVfxThumbnail,
+      },
+      {
+        title: 'Baahubali: The Beginning - Extended Trailer',
+        url: 'https://youtu.be/4lHWa92B_7k?si=Vg1_2Jg413OqSE-Y',
+        label: 'Premiere Pro',
+        thumbnail: visionVfxThumbnail,
+      },
+      {
+        title: 'Baahubali: The Beginning - Cinematic Teaser',
+        url: 'https://youtu.be/GSnmDo4weBs?si=-T_pW6JjhZvdGLB4',
+        label: 'Featured Reel',
+        thumbnail: visionVfxThumbnail,
+      },
     ],
   },
   {
@@ -162,7 +190,9 @@ export const projects: PortfolioItem[] = [
     tools: ['Adobe After Effects', 'VFX Compositing', 'Atmosphere Design', 'Cinematic Enhancement'],
     palette: '#516D7A',
     mediaLinks: [
-      { title: 'She Never Left the Classroom - Part 2', url: 'https://youtu.be/_gkDxkgHniw?si=A3XJjvaOzaOMNV4m', label: 'Short Film Chapter' },
+      { title: 'VFX and Compositing Study 01', url: 'https://youtu.be/cdGQ5hRcGjg?si=O0vat1q1aIoihbiU', label: 'VFX and Compositing' },
+      { title: 'VFX and Compositing Study 02', url: 'https://youtu.be/27i_jafN8QU?si=y_YY9VgsDclZmHLy', label: 'VFX and Compositing' },
+      { title: 'VFX and Compositing Study 03', url: 'https://youtu.be/3IpbbCUzYSo?si=q2yfunEMsZt4JjRG', label: 'VFX and Compositing' },
     ],
   },
   {
@@ -192,6 +222,12 @@ export const projects: PortfolioItem[] = [
       'These studies focus on turning static design elements into animated visual systems through timing, easing, and motion-led hierarchy. The work supports Sanya’s broader brand and teaser projects by showing how movement can guide attention and strengthen visual recall.',
     tools: ['Adobe After Effects', 'Typography Animation', 'Motion Graphics', 'Brand Motion'],
     palette: '#FF8FAB',
+    mediaLinks: [
+      { title: 'Motion Graphics Study 01', url: 'https://youtu.be/qHOvGcsmFpI?si=kuSeoKB0NPR8yPqo', label: 'Motion Graphics' },
+      { title: 'Motion Graphics Study 02', url: 'https://youtu.be/d_Z-ERI-DhE?si=Vwtn7BeFka2VQjN4', label: 'Motion Graphics' },
+      { title: 'Motion Graphics Short 01', url: 'https://youtube.com/shorts/GlBf_0daeP4?si=SMgiWmJDe81jn9_y', label: 'Motion Graphics Short' },
+      { title: 'Motion Graphics Short 02', url: 'https://youtube.com/shorts/SVMH_LMalgk?si=xoLakmAavWmEpb-Q', label: 'Motion Graphics Short' },
+    ],
   },
   {
     id: 8,
@@ -220,6 +256,7 @@ export const projects: PortfolioItem[] = [
       'This category combines academic pieces such as Baahubali teaser work with freelance branding and content projects. It highlights Sanya’s ability to work inside brief-driven environments while continuing to develop an imaginative personal style.',
     tools: ['Adobe Creative Suite', 'Presentation Boards', 'Client Communication', 'Project Delivery'],
     palette: '#F28482',
+    heroImage: profilePortrait,
   },
 ]
 
@@ -290,7 +327,7 @@ export function getPortfolioMediaEntries() {
       chapter: project.title,
       url: mediaLink.url,
       embedUrl: getYouTubeEmbedUrl(mediaLink.url),
-      thumbnail: getYouTubeThumbnail(mediaLink.url),
+      thumbnail: mediaLink.thumbnail ?? getYouTubeThumbnail(mediaLink.url),
     })),
   )
 }

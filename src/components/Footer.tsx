@@ -38,7 +38,7 @@ export default function Footer() {
 
           <div className="site-footer-divider" />
 
-          <div className="flex flex-col gap-3 text-sm text-white/48 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-3 text-sm text-white/64 md:flex-row md:items-center md:justify-between">
             <p>(c) {year} {siteIdentity.brandName}. All rights reserved.</p>
             <p>{footerContent.closingNote}</p>
           </div>

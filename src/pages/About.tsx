@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion
 import PageMeta from '../components/PageMeta'
 import { getSiteUrl } from '../config/site'
 import { aboutContent, seoContent } from '../data/siteContent'
+import profilePortrait from '../img/WhatsApp Image 2026-05-12 at 5.53.45 PM.jpeg'
 
 export default function About() {
   const reducedMotion = useReducedMotion() ?? false
@@ -66,6 +67,26 @@ export default function About() {
           </motion.div>
 
           <div className="space-y-6 min-w-0">
+            <motion.figure
+              initial={{ opacity: 0, y: reducedMotion ? 0 : 22, rotate: reducedMotion ? 0 : 1.2 }}
+              whileInView={{ opacity: 1, y: 0, rotate: reducedMotion ? 0 : 1.2 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="neo-brutal-panel neo-brutal-panel-dark about-panel-focus overflow-hidden p-4"
+            >
+              <div className="overflow-hidden rounded-[1.4rem] border border-white/10">
+                <img
+                  src={profilePortrait}
+                  alt="Sanya Jha portrait"
+                  className="h-[26rem] w-full object-cover object-top"
+                />
+              </div>
+              <figcaption className="pt-4">
+                <p className="text-xs uppercase tracking-[0.28em] text-[#fff8ef]/70">Creative profile</p>
+                <p className="mt-2 text-[#fff8ef]/86">A portrait-led frame that keeps the personal side of the portfolio connected to the same cinematic mood.</p>
+              </figcaption>
+            </motion.figure>
+
             <motion.div
               initial={{ opacity: 0, y: reducedMotion ? 0 : 24, rotate: reducedMotion ? 0 : 1.2 }}
               whileInView={{ opacity: 1, y: 0, rotate: reducedMotion ? 0 : 1.2 }}

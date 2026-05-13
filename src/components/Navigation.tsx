@@ -26,7 +26,7 @@ export default function Navigation() {
           </div>
           <div>
             <p className="font-grotesk text-lg leading-none">{siteIdentity.brandName}</p>
-            <p className="text-[0.7rem] uppercase tracking-[0.28em] text-white/40 mt-1">
+            <p className="text-[0.7rem] uppercase tracking-[0.28em] text-white/58 mt-1">
               {siteIdentity.professionalTitle}
             </p>
           </div>
@@ -40,7 +40,7 @@ export default function Navigation() {
                 className={`px-4 py-2 rounded-full text-sm transition-all ${
                   isActive(nav.href)
                     ? 'bg-white/8 text-white'
-                    : 'text-white/60 hover:text-white hover:bg-white/5'
+                    : 'text-white/72 hover:text-white hover:bg-white/5'
                 }`}
               >
                 {nav.title}
@@ -73,7 +73,7 @@ export default function Navigation() {
                     className={`block px-4 py-3 rounded-xl text-sm transition-colors ${
                       isActive(nav.href)
                         ? 'bg-white/8 text-white'
-                        : 'text-white/65 hover:text-white hover:bg-white/5'
+                        : 'text-white/78 hover:text-white hover:bg-white/5'
                     }`}
                     onClick={() => setToggle(false)}
                   >

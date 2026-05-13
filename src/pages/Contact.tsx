@@ -83,7 +83,7 @@ export default function Contact() {
               {contactContent.title}
               <span className="block accent-text">Open for cinematic and design-driven collaborations.</span>
             </h1>
-            <p className="text-[#c7b8a7] text-lg leading-relaxed max-w-xl">
+            <p className="text-[#e2d5c8] text-lg leading-relaxed max-w-xl">
               {contactContent.intro}
             </p>
           </div>
@@ -100,8 +100,8 @@ export default function Contact() {
                   transition={{ duration: 0.45, delay: idx * 0.06 }}
                   className="interface-cell"
                 >
-                  <p className="text-xs uppercase tracking-[0.28em] text-white/40 mb-2">{note.label}</p>
-                  <p className="text-[#f4efe7]/82 leading-relaxed">{note.value}</p>
+                  <p className="text-xs uppercase tracking-[0.28em] text-white/58 mb-2">{note.label}</p>
+                  <p className="text-[#f4efe7]/88 leading-relaxed">{note.value}</p>
                 </motion.div>
               ))}
             </div>
@@ -205,9 +205,9 @@ export default function Contact() {
                   transition={{ duration: 0.55, delay: idx * 0.08 }}
                   className="interface-panel interface-link block p-6"
                 >
-                  <p className="text-xs uppercase tracking-[0.28em] text-white/40 mb-3">{item.label}</p>
+                  <p className="text-xs uppercase tracking-[0.28em] text-white/58 mb-3">{item.label}</p>
                   <h3 className="text-2xl font-grotesk mb-1 text-[#f4efe7] break-words">{item.value}</h3>
-                  <p className="text-[#c7b8a7] leading-relaxed">Direct signal path.</p>
+                  <p className="text-[#e2d5c8] leading-relaxed">Direct signal path.</p>
                 </CardTag>
               )
             })}
