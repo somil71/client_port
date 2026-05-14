@@ -231,6 +231,9 @@ export const seoContent = {
   showreelTitle: 'Vision VFX | Showreel',
   showreelDescription:
     "Watch Sanya Jha's latest showreel featuring Baahubali teaser work, trailer edits, short films, and VFX-led storytelling clips.",
+  galleryTitle: 'Vision VFX | Gallery',
+  galleryDescription:
+    'Explore a composed visual gallery of matte paintings, Illustrator artwork, storyboard pages, and animation studies arranged as cinematic boards.',
   contactTitle: 'Vision VFX | Contact',
   contactDescription:
     'Get in touch with Sanya Jha for freelance VFX, video editing, motion design, and brand identity collaborations.',

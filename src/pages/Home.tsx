@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageMeta from '../components/PageMeta'
 import { getSiteUrl } from '../config/site'
+import { portfolioAssets } from '../data/projects'
 import { homepageContent, seoContent, siteIdentity } from '../data/siteContent'
 
 export default function Home() {
@@ -27,9 +28,16 @@ export default function Home() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
-          className="grid xl:grid-cols-[minmax(0,0.86fr)_minmax(24rem,1.14fr)] gap-10 xl:gap-14 items-center mb-24 lg:mb-32 min-h-[calc(100vh-10rem)]"
+          className="relative overflow-hidden rounded-[2.2rem] grid xl:grid-cols-[minmax(0,0.86fr)_minmax(24rem,1.14fr)] gap-10 xl:gap-14 items-center mb-24 lg:mb-32 min-h-[calc(100vh-10rem)] px-4 py-6 lg:px-6"
         >
-          <div className="space-y-6 min-w-0">
+          <img
+            src={portfolioAssets.mattePainting.preview}
+            alt="Matte painting atmospheric backdrop"
+            className="absolute inset-0 h-full w-full object-cover opacity-[0.14]"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(18,11,10,0.96),rgba(18,11,10,0.82)_42%,rgba(18,11,10,0.78)),radial-gradient(circle_at_72%_22%,rgba(255,214,173,0.16),transparent_26%)]" />
+
+          <div className="relative z-10 space-y-6 min-w-0">
             <span className="eyebrow">{homepageContent.eyebrow}</span>
             <div className="space-y-5">
               <h1 className="display-hero max-w-[10ch] text-[clamp(3.1rem,7vw,6.2rem)] leading-[0.92]">
@@ -57,11 +65,31 @@ export default function Home() {
                 </span>
               ))}
             </div>
+
+            <div className="section-frame max-w-xl rounded-[1.6rem] p-3 sm:p-4">
+              <div className="grid gap-4 sm:grid-cols-[7.2rem_minmax(0,1fr)] sm:items-center">
+                <div className="overflow-hidden rounded-[1.1rem] border border-white/10 bg-black/20">
+                  <img
+                    src={portfolioAssets.animationStudies.walkCycle.preview}
+                    alt="Walk cycle animation study"
+                    className="h-28 w-full object-cover sm:h-24"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/58">Animation skills loop</p>
+                  <p className="text-base font-grotesk leading-tight text-white">Walk cycle study from the Adobe Animate archive.</p>
+                  <p className="muted-copy text-sm leading-relaxed">
+                    One of the motion-principles exercises now featured inside the 2D animation case study.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <motion.div
             style={{ y: heroGlowY }}
-            className="section-frame editorial-card rounded-[2rem] p-4 lg:p-5 overflow-hidden w-full xl:max-w-[38rem] xl:ml-auto xl:mt-20"
+            className="relative z-10 section-frame editorial-card rounded-[2rem] p-4 lg:p-5 overflow-hidden w-full xl:max-w-[38rem] xl:ml-auto xl:mt-20"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
             <div className="relative min-h-[30rem] sm:min-h-[32rem] rounded-[1.5rem] overflow-hidden border border-white/10 bg-[radial-gradient(circle_at_top,_rgba(255,155,113,0.22),_transparent_38%),linear-gradient(180deg,_rgba(38,25,22,0.85),_rgba(13,10,10,0.95))]">

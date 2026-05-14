@@ -35,6 +35,112 @@ export type MediaLink = {
   thumbnail?: string
 }
 
+export type GalleryArchiveEntry = {
+  id: string
+  title: string
+  kind: 'image' | 'video' | 'animation'
+  collection: string
+  description: string
+  preview: string
+  open: string
+}
+
+function localGalleryAsset(fileName: string) {
+  return `/gallery-assets/${fileName}`
+}
+
+function googleDriveOpen(fileId: string) {
+  return `https://drive.google.com/file/d/${fileId}/view?usp=sharing`
+}
+
+export const portfolioAssets = {
+  mattePainting: {
+    preview: localGalleryAsset('matte-painting.jpg'),
+    open: googleDriveOpen('13230m_yyw4wnBGNQ149UyTIJSCPeyTuM'),
+  },
+  illustratorGallery: [
+    {
+      title: 'Illustrator Work Card 01',
+      preview: localGalleryAsset('illustrator-01.jpg'),
+      open: googleDriveOpen('1LIybJmCaFyRTATiS39JcnHUrXZVHAJv6'),
+    },
+    {
+      title: 'Illustrator Work Card 02',
+      preview: localGalleryAsset('illustrator-02.jpg'),
+      open: googleDriveOpen('1dA-ITMvuwRB5VXT0G9SKblDcLbMxFnZI'),
+    },
+    {
+      title: 'Illustrator Work Card 03',
+      preview: localGalleryAsset('illustrator-03.jpg'),
+      open: googleDriveOpen('11IlzLVh4HD6azMVOKBoBMSQtfXt6YNQj'),
+    },
+    {
+      title: 'Illustrator Work Card 04',
+      preview: localGalleryAsset('illustrator-04.jpg'),
+      open: googleDriveOpen('1xA6uG73RqNy2aF1Okg5l8XvlaWMHN5Vh'),
+    },
+    {
+      title: 'Illustrator Work Card 05',
+      preview: localGalleryAsset('illustrator-05.jpg'),
+      open: googleDriveOpen('1pQ_s0Rn-Y0ZfOx8VGTOovXWdvjDRYFCa'),
+    },
+    {
+      title: 'Illustrator Work Card 06',
+      preview: localGalleryAsset('illustrator-06.jpg'),
+      open: googleDriveOpen('1WswbVXWOfiz8MMNew7Y7EDr8vzhSiyHu'),
+    },
+  ],
+  storyboards: [
+    {
+      title: 'Storyboard Page 01',
+      preview: localGalleryAsset('storyboard-01.jpg'),
+      open: googleDriveOpen('1xzDxy-G-emi5MiJjZOlaXtSuVkUgsXsS'),
+    },
+    {
+      title: 'Storyboard Page 02',
+      preview: localGalleryAsset('storyboard-02.jpg'),
+      open: googleDriveOpen('1vPTngtCzsmZ9-oxSQGSDHxWPqwTjmYir'),
+    },
+  ],
+  animationStudies: {
+    pendulum: {
+      title: 'Pendulum Timing Study',
+      preview: localGalleryAsset('animation-pendulum.gif'),
+      open: googleDriveOpen('13nr3kbPVSzMEbM-mNyIgfZM2bg3UYumX'),
+    },
+    characterTracing: {
+      title: 'Character Tracing Motion Study',
+      preview: localGalleryAsset('animation-character-tracing.gif'),
+      open: googleDriveOpen('1ac7MdpAmsy0z8aqCosL4pz8LJwUfsjPI'),
+    },
+    eyeBlink: {
+      title: 'Eye Blink Micro-Animation',
+      preview: localGalleryAsset('animation-eye-blink.gif'),
+      open: googleDriveOpen('1lusnjkAms1HZDA8R9m5uWX72n2f29s6N'),
+    },
+    car: {
+      title: 'Car Motion Exercise',
+      preview: localGalleryAsset('animation-car.gif'),
+      open: googleDriveOpen('1mPSFb4GErQcSyHhffC8cFY1HtiVRJx4E'),
+    },
+    clockPendulum: {
+      title: 'Clock Pendulum Study',
+      preview: localGalleryAsset('animation-clock-pendulum.gif'),
+      open: googleDriveOpen('1mQh68MnxBxeJ8xAgIfosC7DsmmSATiJD'),
+    },
+    walkCycle: {
+      title: 'Walk Cycle Loop',
+      preview: localGalleryAsset('animation-walk-cycle.gif'),
+      open: googleDriveOpen('1vNvvvJUMKcVX4-UVjiNhCe6PdTCmJ6dx'),
+    },
+    backgroundTracing: {
+      title: 'Background Tracing Animation',
+      preview: localGalleryAsset('animation-background-tracing.gif'),
+      open: googleDriveOpen('1nQkXezBcz9rutAB-CcpTopBPFnIj_qmD'),
+    },
+  },
+} as const
+
 export const categories: { id: CategoryId; label: string }[] = [
   { id: 'all', label: 'All Work' },
   { id: 'graphic-design', label: 'Graphic Design' },
@@ -172,8 +278,21 @@ export const projects: PortfolioItem[] = [
       'Part 1 introduces the world and tension of a classroom mystery through atmosphere, visual composition, and structural pacing. The piece emphasizes environment as story, using cinematic framing and tonal restraint to invite curiosity before the supernatural layer fully arrives.',
     tools: ['Digital Filmmaking', 'Visual Direction', 'Storyboarding', 'Adobe Premiere Pro'],
     palette: '#3F495A',
+    heroImage: portfolioAssets.storyboards[0].preview,
     mediaLinks: [
       { title: 'She Never Left the Classroom - Part 1', url: 'https://youtu.be/_gkDxkgHniw?si=A3XJjvaOzaOMNV4m', label: 'Short Film Chapter' },
+      {
+        title: portfolioAssets.storyboards[0].title,
+        url: portfolioAssets.storyboards[0].open,
+        label: 'Storyboard / Pre-production',
+        thumbnail: portfolioAssets.storyboards[0].preview,
+      },
+      {
+        title: portfolioAssets.storyboards[1].title,
+        url: portfolioAssets.storyboards[1].open,
+        label: 'Storyboard / Pre-production',
+        thumbnail: portfolioAssets.storyboards[1].preview,
+      },
     ],
   },
   {
@@ -208,6 +327,13 @@ export const projects: PortfolioItem[] = [
       'This ongoing branding collection brings together logos, business cards, and supporting visual assets created for freelance clients. The work balances clean business communication with personality, showing Sanya’s ability to develop visual systems that function across print and digital touchpoints.',
     tools: ['Adobe Photoshop', 'Adobe Illustrator', 'Typography', 'Layout Design', 'Brand Identity'],
     palette: '#E27A52',
+    heroImage: portfolioAssets.illustratorGallery[0].preview,
+    mediaLinks: portfolioAssets.illustratorGallery.map((asset, index) => ({
+      title: asset.title,
+      url: asset.open,
+      label: `Illustrator Gallery ${String(index + 1).padStart(2, '0')}`,
+      thumbnail: asset.preview,
+    })),
   },
   {
     id: 7,
@@ -242,6 +368,51 @@ export const projects: PortfolioItem[] = [
       'This study reflects Sanya’s interest in bringing stories and visual concepts to life through movement. It explores key animation principles such as timing, easing, and character energy while reinforcing the same narrative instincts seen in her editing and comic work.',
     tools: ['Adobe Animate', 'Timing Studies', '2D Animation Principles', 'Storyboarding'],
     palette: '#FFC145',
+    heroImage: portfolioAssets.animationStudies.walkCycle.preview,
+    mediaLinks: [
+      {
+        title: portfolioAssets.animationStudies.walkCycle.title,
+        url: portfolioAssets.animationStudies.walkCycle.open,
+        label: 'Hero / Skills Loop',
+        thumbnail: portfolioAssets.animationStudies.walkCycle.preview,
+      },
+      {
+        title: portfolioAssets.animationStudies.pendulum.title,
+        url: portfolioAssets.animationStudies.pendulum.open,
+        label: 'Animation Principles',
+        thumbnail: portfolioAssets.animationStudies.pendulum.preview,
+      },
+      {
+        title: portfolioAssets.animationStudies.characterTracing.title,
+        url: portfolioAssets.animationStudies.characterTracing.open,
+        label: 'Character Animation',
+        thumbnail: portfolioAssets.animationStudies.characterTracing.preview,
+      },
+      {
+        title: portfolioAssets.animationStudies.eyeBlink.title,
+        url: portfolioAssets.animationStudies.eyeBlink.open,
+        label: 'Micro-animation',
+        thumbnail: portfolioAssets.animationStudies.eyeBlink.preview,
+      },
+      {
+        title: portfolioAssets.animationStudies.car.title,
+        url: portfolioAssets.animationStudies.car.open,
+        label: 'Motion Exercise',
+        thumbnail: portfolioAssets.animationStudies.car.preview,
+      },
+      {
+        title: portfolioAssets.animationStudies.clockPendulum.title,
+        url: portfolioAssets.animationStudies.clockPendulum.open,
+        label: 'Timing Demo',
+        thumbnail: portfolioAssets.animationStudies.clockPendulum.preview,
+      },
+      {
+        title: portfolioAssets.animationStudies.backgroundTracing.title,
+        url: portfolioAssets.animationStudies.backgroundTracing.open,
+        label: 'Background Tracing',
+        thumbnail: portfolioAssets.animationStudies.backgroundTracing.preview,
+      },
+    ],
   },
   {
     id: 9,
@@ -320,6 +491,13 @@ export function getYouTubeThumbnail(url: string) {
 export function getPortfolioMediaEntries() {
   return projects.flatMap((project) =>
     (project.mediaLinks ?? []).map((mediaLink, index) => ({
+      mediaLink,
+      index,
+      project,
+      videoId: extractYouTubeId(mediaLink.url),
+    }))
+    .filter((entry) => Boolean(entry.videoId))
+    .map(({ mediaLink, index, project }) => ({
       id: `${project.slug}-${index}`,
       title: mediaLink.title,
       category: getCategoryLabel(project.category),
@@ -330,4 +508,68 @@ export function getPortfolioMediaEntries() {
       thumbnail: mediaLink.thumbnail ?? getYouTubeThumbnail(mediaLink.url),
     })),
   )
+}
+
+export function getGalleryArchiveEntries(): GalleryArchiveEntry[] {
+  const stillImageEntries: GalleryArchiveEntry[] = [
+    {
+      id: 'matte-painting-main',
+      title: 'Matte Painting Environment',
+      kind: 'image',
+      collection: 'Atmosphere chamber',
+      description: 'Cinematic world-building plate',
+      preview: portfolioAssets.mattePainting.preview,
+      open: portfolioAssets.mattePainting.open,
+    },
+    ...portfolioAssets.illustratorGallery.map((asset, index) => ({
+      id: `illustrator-${index + 1}`,
+      title: asset.title,
+      kind: 'image' as const,
+      collection: 'Illustrator salon',
+      description: `Pinned print ${String(index + 1).padStart(2, '0')}`,
+      preview: asset.preview,
+      open: asset.open,
+    })),
+    ...portfolioAssets.storyboards.map((asset, index) => ({
+      id: `storyboard-${index + 1}`,
+      title: asset.title,
+      kind: 'image' as const,
+      collection: 'Storyboard desk',
+      description: `Pre-production sheet ${String(index + 1).padStart(2, '0')}`,
+      preview: asset.preview,
+      open: asset.open,
+    })),
+    ...Object.values(portfolioAssets.animationStudies).map((asset, index) => ({
+      id: `animation-study-${index + 1}`,
+      title: asset.title,
+      kind: 'animation' as const,
+      collection: 'Motion constellation',
+      description: 'Animated study loop',
+      preview: asset.preview,
+      open: asset.open,
+    })),
+  ]
+
+  const videoEntries: GalleryArchiveEntry[] = projects.flatMap((project) =>
+    (project.mediaLinks ?? []).reduce<GalleryArchiveEntry[]>((entries, mediaLink, index) => {
+      const videoId = extractYouTubeId(mediaLink.url)
+      if (!videoId) {
+        return entries
+      }
+
+      entries.push({
+        id: `${project.slug}-video-${index}`,
+        title: mediaLink.title,
+        kind: 'video',
+        collection: getCategoryLabel(project.category),
+        description: `${project.title} / ${mediaLink.label}`,
+        preview: mediaLink.thumbnail ?? getYouTubeThumbnail(mediaLink.url),
+        open: mediaLink.url,
+      })
+
+      return entries
+    }, []),
+  )
+
+  return [...stillImageEntries, ...videoEntries]
 }

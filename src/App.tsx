@@ -10,6 +10,8 @@ const Home = lazy(() => import('./pages/Home'))
 const Work = lazy(() => import('./pages/Work'))
 const WorkDetail = lazy(() => import('./pages/WorkDetail'))
 const About = lazy(() => import('./pages/About'))
+const Gallery = lazy(() => import('./pages/Gallery'))
+const GalleryViewAll = lazy(() => import('./pages/GalleryViewAll'))
 const Showreel = lazy(() => import('./pages/Showreel'))
 const Contact = lazy(() => import('./pages/Contact'))
 
@@ -26,6 +28,8 @@ export default function App() {
             <Route path="/work" element={<Work />} />
             <Route path="/work/:slug" element={<WorkDetail />} />
             <Route path="/about" element={<About />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/gallery/view-all" element={<GalleryViewAll />} />
             <Route path="/showreel" element={<Showreel />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFoundPage />} />
